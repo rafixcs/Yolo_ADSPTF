@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+message RequestDetction {
+    bytes img = 1;
+}
+
+message ResponseDetection {
+    bytes detections = 1;
+}
+
+service YoloService {
+    rpc Detection(RequestDetction) returns (ResponseDetection) {}
+}
