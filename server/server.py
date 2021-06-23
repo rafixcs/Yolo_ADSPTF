@@ -1,5 +1,5 @@
 import yolo_pb2_grpc
-import yolo_pb2
+import yolo_pb2 
 
 import logging
 import grpc
@@ -11,15 +11,20 @@ from concurrent import futures
 import time
 from subprocess import check_output
 
+from detect import detect
+
 class BaseLine(yolo_pb2_grpc.YoloServiceServicer):
     def Detection(self, request, context):
         print('Received an image!')
 
         stream = io.BytesIO(request.img)
         img = Image.open(stream)
-        #img_to_save = './temp/' + str(time.time())         
+        img_to_save = './infer_image.jpg'
+        img.save(img_to_save)
+        #         
+        #print('Image size received:',img.size)
 
-        print('Image size received:',img.size)       
+        detect(weights='./runs/training/weights/best.pt', source='server/' + img_to_save, project='server/detections/', )
 
         return yolo_pb2.ResponseDetection(detections=str.encode('Testando isso aqui meeu'))
 
