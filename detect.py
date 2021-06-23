@@ -158,7 +158,7 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
                 #exit()
 
             # Print time (inference + NMS)
-            #print(f'{s}Done. ({t2 - t1:.3f}s)')
+            print(f'{s}Done. ({t2 - t1:.3f}s)')
 
             # Stream results
             if view_img:
@@ -186,12 +186,12 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
 
     if save_txt or save_img:
         s = f"\n{len(list(save_dir.glob('labels/*.txt')))} labels saved to {save_dir / 'labels'}" if save_txt else ''
-        #print(f"Results saved to {save_dir}{s}")
+        print(f"Results saved to {save_dir}{s}")
 
     if update:
         strip_optimizer(weights)  # update model (to fix SourceChangeWarning)
 
-    #print(f'Done. ({time.time() - t0:.3f}s)')    
+    print(f'Done. ({time.time() - t0:.3f}s)')    
     return lines_detect   #, im0.shape
 
 
